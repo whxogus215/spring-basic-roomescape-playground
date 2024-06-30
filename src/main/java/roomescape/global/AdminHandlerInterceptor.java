@@ -4,8 +4,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-import roomescape.auth.JwtTokenManager;
-import roomescape.constant.AuthConstant;
+import roomescape.domain.auth.JwtTokenManager;
+import roomescape.global.constant.AuthConstant;
 
 @Component
 public class AdminHandlerInterceptor implements HandlerInterceptor {
