@@ -39,6 +39,8 @@ Long memberId = Long.valueOf(Jwts.parserBuilder()
 - [x] JPA를 사용하기 위한 의존성을 추가한다.
 - [ ] 패키지 구조를 변경한다. (repository / domain 패키지 추가)
   - [ ] DAO가 아닌 Repository를 사용한다.
-- [ ] 각 클래스들의 연관관계를 확인할 수 있는 다이어그램을 그린다.
+- [x] 각 클래스들의 연관관계를 확인할 수 있는 다이어그램을 그린다.
   - [ ] 연관관계가 없는(다른 클래스를 참조하지 않는) 클래스를 엔티티로 매핑한다.
   - [ ] 연관관계가 있는 클래스들을 서로 매핑한다.
+
+![img.png](class_diagram.png)
