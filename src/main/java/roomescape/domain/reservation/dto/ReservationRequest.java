@@ -1,5 +1,6 @@
 package roomescape.domain.reservation.dto;
 
+import roomescape.domain.member.entity.Member;
 import roomescape.domain.reservation.entity.Reservation;
 import roomescape.domain.theme.entity.Theme;
 import roomescape.domain.time.entity.Time;
@@ -38,7 +39,7 @@ public class ReservationRequest {
         return time;
     }
 
-    public Reservation toEntity(final Time time, final Theme theme) {
-        return new Reservation(name, date, time, theme);
+    public Reservation toEntity(final Time time, final Theme theme, final Member member) {
+        return new Reservation(name, date, time, theme, member);
     }
 }
