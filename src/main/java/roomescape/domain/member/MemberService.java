@@ -5,20 +5,23 @@ import roomescape.domain.auth.JwtTokenManager;
 import roomescape.domain.member.dto.MemberLoginRequest;
 import roomescape.domain.member.dto.MemberRequest;
 import roomescape.domain.member.dto.MemberResponse;
+import roomescape.domain.member.entity.Member;
+import roomescape.domain.member.repository.MemberRepository;
 
 @Service
 public class MemberService {
 
-    private final MemberDao memberDao;
+    private final MemberRepository memberRepository;
     private final JwtTokenManager jwtTokenManager;
 
-    public MemberService(MemberDao memberDao, JwtTokenManager jwtTokenManager) {
-        this.memberDao = memberDao;
+    public MemberService(final MemberRepository memberRepository,
+                         final JwtTokenManager jwtTokenManager) {
+        this.memberRepository = memberRepository;
         this.jwtTokenManager = jwtTokenManager;
     }
 
     public MemberResponse createMember(MemberRequest memberRequest) {
-        Member member = memberDao.save(
+        Member member = memberRepository.save(
                 new Member(
                         memberRequest.getName(), memberRequest.getEmail(),
                         memberRequest.getPassword(), "USER"));
@@ -26,7 +29,7 @@ public class MemberService {
     }
 
     public String findMember(MemberLoginRequest memberLoginRequest) {
-        final Member member = memberDao.findByEmailAndPassword(
+        final Member member = memberRepository.findByEmailAndPassword(
                 memberLoginRequest.email(), memberLoginRequest.password());
         return jwtTokenManager.createToken(member);
     }

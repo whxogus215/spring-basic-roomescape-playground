@@ -6,7 +6,7 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import roomescape.global.constant.AuthConstant;
-import roomescape.domain.member.Member;
+import roomescape.domain.member.entity.Member;
 
 @Component
 public class JwtTokenManager {
