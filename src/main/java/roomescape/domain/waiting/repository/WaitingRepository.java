@@ -3,6 +3,7 @@ package roomescape.domain.waiting.repository;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import roomescape.domain.waiting.dto.WaitingWithRank;
 import roomescape.domain.waiting.entity.Waiting;
 
@@ -25,5 +26,15 @@ public interface WaitingRepository extends JpaRepository<Waiting, Long> {
             "FROM Waiting w " +
             "WHERE w.member.id = :memberId"
     )
-    List<WaitingWithRank> findWaitingWithRankByMemberId(Long memberId);
+    List<WaitingWithRank> findWaitingWithRankByMemberId(@Param("memberId") Long memberId);
+
+    @Query(
+            "SELECT COUNT(w) FROM Waiting w " +
+            "WHERE w.theme.id = :themeId " +
+            "   AND w.time.id = :timeId " +
+            "   AND w.date = :date"
+    )
+    Long countByThemeIdAndTimeIdAndDate(@Param("themeId") Long themeId,
+                                        @Param("timeId") Long timeId,
+                                        @Param("date") String date);
 }

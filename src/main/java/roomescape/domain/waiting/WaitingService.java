@@ -49,13 +49,15 @@ public class WaitingService {
                 .orElseThrow(() -> new RuntimeException("예약 시간이 존재하지 않습니다."));
         final Theme findTheme = themeRepository.findById(waitingRequest.theme())
                 .orElseThrow(() -> new RuntimeException("예약 테마가 존재하지 않습니다."));
+        final Long waitingNumber = waitingRepository.countByThemeIdAndTimeIdAndDate(
+                findTheme.getId(), findTime.getId(), waitingRequest.date());
         final Waiting savedWaiting = waitingRepository.save(new Waiting(
                 waitingRequest.date(),
                 findMember,
                 findTime,
                 findTheme
         ));
-        return WaitingResponse.from(savedWaiting);
+        return WaitingResponse.of(savedWaiting, waitingNumber + 1);
     }
 
     public void deleteWaiting(Long id) {
