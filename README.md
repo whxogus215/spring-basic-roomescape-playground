@@ -23,42 +23,55 @@
   - `preHandle`을 구현
   - 토큰의 Payload에 들어있는 `ROLE` 값을 확인하여 권환 확인
 
-### 추후 공부할 내용
-1. Cookie 생성 시, `HTTP ONLY` 옵션을 활성화하는 이유
-2. 
-해당 코드가 어떠한 기능을 수행하며, `Claims`가 어떠한 역할을 하는 객체인지 알아보기
-```java
-Long memberId = Long.valueOf(Jwts.parserBuilder()
-                    .setSigningKey(Keys.hmacShaKeyFor("Yn2kjibddFAWtnPJ2AFlL8WXmohJMCvigQggaEypa5E=".getBytes()))
-                    .build()
-                    .parseClaimsJws(token)
-                    .getBody().getSubject());
-```
 
 ## 4단계 - JPA 전환
 - [x] JPA를 사용하기 위한 의존성을 추가한다.
 - [x] 패키지 구조를 변경한다. (repository / domain 패키지 추가)
-  - [x] DAO가 아닌 Repository를 사용한다.
+- [x] DAO가 아닌 Repository를 사용한다.
 - [x] 각 클래스들의 연관관계를 확인할 수 있는 다이어그램을 그린다.
-  - [x] 연관관계가 없는(다른 클래스를 참조하지 않는) 클래스를 엔티티로 매핑한다.
-  - [x] 연관관계가 있는 클래스들을 서로 매핑한다.
+- [x] 연관관계가 없는(다른 클래스를 참조하지 않는) 클래스를 엔티티로 매핑한다.
+- [x] 연관관계가 있는 클래스들을 서로 매핑한다.
 
 ![img.png](class_diagram.png)
 
 ## 5단계 - 내 예약 목록 조회
 - [x] 내 예약 목록을 조회하는 API를 구현한다.
-  - `GET /reservation-mine` 요청 시, Member와 Reservation 필드의 조합으로 조회한 Reservation 리스트를 반환한다.
-  - [x] 응답에 필요한 DTO를 새로 만든다.
+- `GET /reservation-mine` 요청 시, Member와 Reservation 필드의 조합으로 조회한 Reservation 리스트를 반환한다.
+- [x] 응답에 필요한 DTO를 새로 만든다.
 - [x] Reservation 클래스에 Member와의 연관관계가 추가된다.
-  - Member는 Reservation이 있을 수도 없을 수도 있다.
-  - Reservation은 Member가 반드시 존재한다. 따라서 Reservation 쪽에서 Member를 알고 있는게 맞을 것 같다.
-  - [x] 클래스 다이어그램 수정하기
+- Member는 Reservation이 있을 수도 없을 수도 있다.
+- Reservation은 Member가 반드시 존재한다. 따라서 Reservation 쪽에서 Member를 알고 있는게 맞을 것 같다.
+- [x] 클래스 다이어그램 수정하기
+
 ![img.png](class_diagram_revised.png)
 
-
+## 6단계 - 예약 대기 기능
+- [x] 예약 대기를 추가하는 API를 구현한다.
+  - 예약 대기도 예약과 비슷한 엔티티라고 생각한다.
+  - [x] 예약 대기 엔티티 생성
+  - [x] 컨트롤러, 서비스, 리포지토리 생성
+- [ ] 예약 대기를 삭제하는 API를 구현한다.
+- [ ] 예약 목록을 조회할 때, 예약대기 목록도 함께 조회한다.
+- [ ] 기존의 ReservationService를 수정한다.
+- [ ] 중복 예약이 불가능해야 한다.
+![img.png](class_diagram_add_waiting.png)
 
 ### 해야할 것들
 1. 컨트롤러에 DTO를 반환하도록 리팩토링(ex, TimeService)
 2. 컨트롤러가 서비스를 의존하도록 리팩토링(ex, ThemeController)
 3. 서비스 계층 로직에서 라인이 20줄 넘어가는 부분 리팩토링(ex. ReservationService의 save())
 4. 서브모듈 적용해서 properties 파일 형상관리 하기
+
+### 추후 공부할 내용
+1. Cookie 생성 시, `HTTP ONLY` 옵션을 활성화하는 이유
+2.
+해당 코드가 어떠한 기능을 수행하며, `Claims`가 어떠한 역할을 하는 객체인지 알아보기
+```java
+Long memberId = Long.valueOf(Jwts.parserBuilder()
+        .setSigningKey(Keys.hmacShaKeyFor("Yn2kjibddFAWtnPJ2AFlL8WXmohJMCvigQggaEypa5E=".getBytes()))
+        .build()
+        .parseClaimsJws(token)
+        .getBody().getSubject());
+```
+3. JPA 연관관계 복습
+4. SQL문 공부 및 실습
