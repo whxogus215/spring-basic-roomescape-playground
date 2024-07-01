@@ -6,8 +6,7 @@ import roomescape.domain.reservation.entity.Reservation;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
 
-    /**
-     * Reservation의 Date와 Theme의 Id(PK)를 기준으로 조회
-     */
+    // Reservation의 Date와 Theme의 Id(PK)를 기준으로 조회
     List<Reservation> findByDateAndThemeId(String date, Long themeId);
+    List<Reservation> findByMemberId(Long memberId);
 }

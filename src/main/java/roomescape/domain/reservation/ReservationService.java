@@ -3,6 +3,7 @@ package roomescape.domain.reservation;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import roomescape.domain.reservation.dto.MyReservationResponse;
 import roomescape.domain.reservation.dto.ReservationRequest;
 import roomescape.domain.member.dto.LoginMember;
 import roomescape.domain.reservation.dto.ReservationResponse;
@@ -52,15 +53,22 @@ public class ReservationService {
                 reservation.getDate(), reservation.getTime().getTime());
     }
 
-    public void deleteById(Long id) {
-        reservationRepository.deleteById(id);
-    }
-
     public List<ReservationResponse> findAll() {
         return reservationRepository.findAll().stream()
                 .map(it -> new ReservationResponse(
                         it.getId(), it.getName(),
                         it.getTheme().getName(), it.getDate(), it.getTime().getTime()))
                 .toList();
+    }
+
+    public List<MyReservationResponse> findMyReservations(Long memberId) {
+        return reservationRepository.findByMemberId(memberId)
+                .stream()
+                .map(MyReservationResponse::from)
+                .toList();
+    }
+
+    public void deleteById(Long id) {
+        reservationRepository.deleteById(id);
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 import java.util.List;
+import roomescape.domain.reservation.dto.MyReservationResponse;
 import roomescape.domain.reservation.dto.ReservationRequest;
 import roomescape.domain.member.dto.LoginMember;
 import roomescape.domain.reservation.dto.ReservationResponse;
@@ -21,6 +22,11 @@ public class ReservationController {
 
     public ReservationController(ReservationService reservationService) {
         this.reservationService = reservationService;
+    }
+
+    @GetMapping("/reservations-mine")
+    public List<MyReservationResponse> getMyReservations(LoginMember loginMember) {
+        return reservationService.findMyReservations(loginMember.id());
     }
 
     @GetMapping("/reservations")
