@@ -55,12 +55,12 @@ VALUES ('10:00'),
        ('18:00'),
        ('20:00');
 
--- 어드민은 이름으로 예약을 추가한다.
-INSERT INTO reservation (name, date, time_id, theme_id)
-VALUES ('어드민', '2024-03-01', 1, 2);
-
--- 사용자는 멤버ID로 예약을 추가한다.
+-- 예약 페이지에서 예약을 추가하는 경우(사용자, 어드민 둘 다 접근 가능)
 INSERT INTO reservation (member_id, name, date, time_id, theme_id)
-VALUES (2, '', '2024-03-01', 1, 1),
-       (2, '', '2024-03-01', 2, 2),
-       (2, '', '2024-03-01', 3, 3);
+VALUES (1, '', '2024-03-01', 1, 1),
+       (1, '', '2024-03-01', 2, 2),
+       (1, '', '2024-03-01', 3, 3);
+
+-- 어드민 페이지에서 예약을 추가하는 경우(어드민만 접근 가능)
+INSERT INTO reservation (name, date, time_id, theme_id)
+VALUES ('브라운', '2024-03-01', 1, 2);

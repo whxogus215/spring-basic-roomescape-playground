@@ -45,7 +45,20 @@ Long memberId = Long.valueOf(Jwts.parserBuilder()
 
 ![img.png](class_diagram.png)
 
+## 5단계 - 내 예약 목록 조회
+- [x] 내 예약 목록을 조회하는 API를 구현한다.
+  - `GET /reservation-mine` 요청 시, Member와 Reservation 필드의 조합으로 조회한 Reservation 리스트를 반환한다.
+  - [x] 응답에 필요한 DTO를 새로 만든다.
+- [x] Reservation 클래스에 Member와의 연관관계가 추가된다.
+  - Member는 Reservation이 있을 수도 없을 수도 있다.
+  - Reservation은 Member가 반드시 존재한다. 따라서 Reservation 쪽에서 Member를 알고 있는게 맞을 것 같다.
+  - [x] 클래스 다이어그램 수정하기
+![img.png](class_diagram_revised.png)
+
+
+
 ### 해야할 것들
 1. 컨트롤러에 DTO를 반환하도록 리팩토링(ex, TimeService)
 2. 컨트롤러가 서비스를 의존하도록 리팩토링(ex, ThemeController)
 3. 서비스 계층 로직에서 라인이 20줄 넘어가는 부분 리팩토링(ex. ReservationService의 save())
+4. 서브모듈 적용해서 properties 파일 형상관리 하기
