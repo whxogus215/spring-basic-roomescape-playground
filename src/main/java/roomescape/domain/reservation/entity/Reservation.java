@@ -1,14 +1,30 @@
-package roomescape.domain.reservation;
+package roomescape.domain.reservation.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import roomescape.domain.theme.entity.Theme;
 import roomescape.domain.time.entity.Time;
 
+@Entity
 public class Reservation {
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private String date;
+
+    @ManyToOne
     private Time time;
+
+    @ManyToOne
     private Theme theme;
+
+    public Reservation() {
+    }
 
     public Reservation(Long id, String name, String date, Time time, Theme theme) {
         this.id = id;
@@ -23,10 +39,6 @@ public class Reservation {
         this.date = date;
         this.time = time;
         this.theme = theme;
-    }
-
-    public Reservation() {
-
     }
 
     public Long getId() {

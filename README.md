@@ -37,10 +37,15 @@ Long memberId = Long.valueOf(Jwts.parserBuilder()
 
 ## 4단계 - JPA 전환
 - [x] JPA를 사용하기 위한 의존성을 추가한다.
-- [ ] 패키지 구조를 변경한다. (repository / domain 패키지 추가)
-  - [ ] DAO가 아닌 Repository를 사용한다.
+- [x] 패키지 구조를 변경한다. (repository / domain 패키지 추가)
+  - [x] DAO가 아닌 Repository를 사용한다.
 - [x] 각 클래스들의 연관관계를 확인할 수 있는 다이어그램을 그린다.
-  - [ ] 연관관계가 없는(다른 클래스를 참조하지 않는) 클래스를 엔티티로 매핑한다.
-  - [ ] 연관관계가 있는 클래스들을 서로 매핑한다.
+  - [x] 연관관계가 없는(다른 클래스를 참조하지 않는) 클래스를 엔티티로 매핑한다.
+  - [x] 연관관계가 있는 클래스들을 서로 매핑한다.
 
 ![img.png](class_diagram.png)
+
+### 해야할 것들
+1. 컨트롤러에 DTO를 반환하도록 리팩토링(ex, TimeService)
+2. 컨트롤러가 서비스를 의존하도록 리팩토링(ex, ThemeController)
+3. 서비스 계층 로직에서 라인이 20줄 넘어가는 부분 리팩토링(ex. ReservationService의 save())
