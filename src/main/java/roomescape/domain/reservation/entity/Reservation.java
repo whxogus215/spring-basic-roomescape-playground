@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import roomescape.domain.member.entity.Member;
 import roomescape.domain.theme.entity.Theme;
 import roomescape.domain.time.entity.Time;
 
@@ -16,6 +17,9 @@ public class Reservation {
 
     private String name;
     private String date;
+
+    @ManyToOne
+    private Member member;
 
     @ManyToOne
     private Time time;
@@ -51,6 +55,10 @@ public class Reservation {
 
     public String getDate() {
         return date;
+    }
+
+    public Member getMember() {
+        return member;
     }
 
     public Time getTime() {
