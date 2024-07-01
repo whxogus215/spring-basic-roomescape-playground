@@ -57,4 +57,8 @@ public class WaitingService {
         ));
         return WaitingResponse.from(savedWaiting);
     }
+
+    public void deleteWaiting(Long id) {
+        waitingRepository.deleteById(id);
+    }
 }
