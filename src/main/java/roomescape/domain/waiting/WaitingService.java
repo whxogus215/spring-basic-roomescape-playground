@@ -1,15 +1,18 @@
 package roomescape.domain.waiting;
 
+import java.util.List;
 import org.springframework.stereotype.Service;
 import roomescape.domain.member.dto.LoginMember;
 import roomescape.domain.member.entity.Member;
 import roomescape.domain.member.repository.MemberRepository;
+import roomescape.domain.reservation.dto.MyReservationResponse;
 import roomescape.domain.theme.entity.Theme;
 import roomescape.domain.theme.repository.ThemeRepository;
 import roomescape.domain.time.entity.Time;
 import roomescape.domain.time.repository.TimeRepository;
 import roomescape.domain.waiting.dto.WaitingRequest;
 import roomescape.domain.waiting.dto.WaitingResponse;
+import roomescape.domain.waiting.dto.WaitingWithRank;
 import roomescape.domain.waiting.entity.Waiting;
 import roomescape.domain.waiting.repository.WaitingRepository;
 
@@ -62,5 +65,11 @@ public class WaitingService {
 
     public void deleteWaiting(Long id) {
         waitingRepository.deleteById(id);
+    }
+
+    public List<MyReservationResponse> findMyWaitings(final Long id) {
+        final List<WaitingWithRank> waitings = waitingRepository.findWaitingWithRankByMemberId(id);
+        // MyReservationResponse로 변환
+        return null;
     }
 }

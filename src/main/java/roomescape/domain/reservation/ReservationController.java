@@ -14,13 +14,14 @@ import roomescape.domain.reservation.dto.MyReservationResponse;
 import roomescape.domain.reservation.dto.ReservationRequest;
 import roomescape.domain.member.dto.LoginMember;
 import roomescape.domain.reservation.dto.ReservationResponse;
+import roomescape.domain.waiting.WaitingService;
 
 @RestController
 public class ReservationController {
 
     private final ReservationService reservationService;
 
-    public ReservationController(ReservationService reservationService) {
+    public ReservationController(final ReservationService reservationService) {
         this.reservationService = reservationService;
     }
 

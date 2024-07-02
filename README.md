@@ -51,8 +51,8 @@
   - [x] 예약 대기 엔티티 생성
   - [x] 컨트롤러, 서비스, 리포지토리 생성
 - [x] 예약 대기를 삭제하는 API를 구현한다.
-- [ ] 예약 목록을 조회할 때, 예약대기 목록도 함께 조회한다.
-- [ ] 기존의 ReservationService를 수정한다.
+- [x] 예약 목록을 조회할 때, 예약대기 목록도 함께 조회한다.
+  - [x] 기존의 ReservationService를 수정한다.
 - [ ] 중복 예약이 불가능해야 한다.
 ![img.png](class_diagram_add_waiting.png)
 

@@ -1,13 +1,12 @@
 package roomescape.domain.reservation;
 
-import org.springframework.stereotype.Service;
-
 import java.util.List;
+import org.springframework.stereotype.Service;
+import roomescape.domain.member.dto.LoginMember;
 import roomescape.domain.member.entity.Member;
 import roomescape.domain.member.repository.MemberRepository;
 import roomescape.domain.reservation.dto.MyReservationResponse;
 import roomescape.domain.reservation.dto.ReservationRequest;
-import roomescape.domain.member.dto.LoginMember;
 import roomescape.domain.reservation.dto.ReservationResponse;
 import roomescape.domain.reservation.entity.Reservation;
 import roomescape.domain.reservation.repository.ReservationRepository;
@@ -15,6 +14,8 @@ import roomescape.domain.theme.entity.Theme;
 import roomescape.domain.theme.repository.ThemeRepository;
 import roomescape.domain.time.entity.Time;
 import roomescape.domain.time.repository.TimeRepository;
+import roomescape.domain.waiting.dto.WaitingWithRank;
+import roomescape.domain.waiting.repository.WaitingRepository;
 
 @Service
 public class ReservationService {
@@ -23,15 +24,18 @@ public class ReservationService {
     private final TimeRepository timeRepository;
     private final ThemeRepository themeRepository;
     private final MemberRepository memberRepository;
+    private final WaitingRepository waitingRepository;
 
     public ReservationService(final ReservationRepository reservationRepository,
                               final TimeRepository timeRepository,
                               final ThemeRepository themeRepository,
-                              final MemberRepository memberRepository) {
+                              final MemberRepository memberRepository,
+                              final WaitingRepository waitingRepository) {
         this.reservationRepository = reservationRepository;
         this.timeRepository = timeRepository;
         this.themeRepository = themeRepository;
         this.memberRepository = memberRepository;
+        this.waitingRepository = waitingRepository;
     }
 
     public ReservationResponse save(ReservationRequest reservationRequest,
@@ -70,10 +74,10 @@ public class ReservationService {
     }
 
     public List<MyReservationResponse> findMyReservations(Long memberId) {
-        return reservationRepository.findByMemberId(memberId)
-                .stream()
-                .map(MyReservationResponse::from)
-                .toList();
+        final List<Reservation> reservations = reservationRepository.findByMemberId(memberId);
+        final List<WaitingWithRank> waitingWithRanks =
+                waitingRepository.findWaitingWithRankByMemberId(memberId);
+        return MyReservationResponse.of(reservations, waitingWithRanks);
     }
 
     public void deleteById(Long id) {

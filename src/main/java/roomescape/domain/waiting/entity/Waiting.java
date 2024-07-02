@@ -34,6 +34,10 @@ public class Waiting {
         this.theme = theme;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getDate() {
         return date;
     }
