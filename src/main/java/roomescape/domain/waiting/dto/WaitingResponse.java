@@ -16,7 +16,7 @@ public record WaitingResponse(
                 waiting.getId(),
                 waiting.getTheme().getName(),
                 waiting.getDate(),
-                waiting.getTime().getTime(),
+                waiting.getTime().getValue(),
                 waitingNumber
         );
     }

@@ -13,26 +13,26 @@ public class Time {
     private Long id;
 
     @Column(name = "time_value")
-    private String time;
+    private String value;
 
     public Time() {
 
     }
 
     public Time(String value) {
-        this.time = value;
+        this.value = value;
     }
 
     public Time(Long id, String value) {
         this.id = id;
-        this.time = value;
+        this.value = value;
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getTime() {
-        return time;
+    public String getValue() {
+        return value;
     }
 }

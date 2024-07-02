@@ -7,6 +7,11 @@ import roomescape.domain.time.entity.Time;
 
 public class ReservationRequest {
 
+    private String name;
+    private String date;
+    private Long theme;
+    private Long time;
+
     public ReservationRequest() {
     }
 
@@ -17,11 +22,6 @@ public class ReservationRequest {
         this.theme = theme;
         this.time = time;
     }
-
-    private String name;
-    private String date;
-    private Long theme;
-    private Long time;
 
     public String getName() {
         return name;

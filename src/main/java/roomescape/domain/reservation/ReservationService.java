@@ -63,7 +63,7 @@ public class ReservationService {
 
         return new ReservationResponse(
                 reservation.getId(), reservationRequest.getName(), reservation.getTheme().getName(),
-                reservation.getDate(), reservation.getTime().getTime());
+                reservation.getDate(), reservation.getTime().getValue());
     }
 
     private void validateDuplicatedReservation(final ReservationRequest request,
@@ -79,7 +79,7 @@ public class ReservationService {
         return reservationRepository.findAll().stream()
                 .map(it -> new ReservationResponse(
                         it.getId(), it.getName(),
-                        it.getTheme().getName(), it.getDate(), it.getTime().getTime()))
+                        it.getTheme().getName(), it.getDate(), it.getTime().getValue()))
                 .toList();
     }
 

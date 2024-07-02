@@ -2,7 +2,6 @@ package roomescape;
 
 import static org.assertj.core.api.Assertions.*;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -30,6 +29,6 @@ public class JpaTest {
 
         final Time persistTime = timeRepository.findById(time.getId()).orElse(null);
 
-        assertThat(persistTime.getTime()).isEqualTo(time.getTime());
+        assertThat(persistTime.getValue()).isEqualTo(time.getValue());
     }
 }

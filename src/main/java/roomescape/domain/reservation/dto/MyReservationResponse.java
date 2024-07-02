@@ -22,13 +22,13 @@ public record MyReservationResponse(
                 .map(re -> new MyReservationResponse(re.getId(),
                         re.getTheme().getName(),
                         re.getDate(),
-                        re.getTime().getTime(),
+                        re.getTime().getValue(),
                         ReservationStatus.RESERVED.getMessage()));
         final Stream<MyReservationResponse> secondStream = waitingWithRanks.stream()
                 .map(wa -> new MyReservationResponse(wa.waiting().getId(),
                         wa.waiting().getTheme().getName(),
                         wa.waiting().getDate(),
-                        wa.waiting().getTime().getTime(),
+                        wa.waiting().getTime().getValue(),
                         ReservationStatus.WAITING.getFormattedMessage(wa.rank() + 1)));
         return Stream.concat(firstStream,secondStream).collect(Collectors.toList());
     }
