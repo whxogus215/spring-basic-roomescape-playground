@@ -53,7 +53,8 @@
 - [x] 예약 대기를 삭제하는 API를 구현한다.
 - [x] 예약 목록을 조회할 때, 예약대기 목록도 함께 조회한다.
   - [x] 기존의 ReservationService를 수정한다.
-- [ ] 중복 예약이 불가능해야 한다.
+- [x] 중복 예약이 불가능해야 한다. (기능 추가하면 이단계 테스트 코드 실패함 : 중복 예약 검증)
+  - [x] ReservationService에서 예약을 추가하기 전에 검증한다.
 ![img.png](class_diagram_add_waiting.png)
 
 ### 해야할 것들

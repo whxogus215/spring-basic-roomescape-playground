@@ -49,7 +49,6 @@ public class ReservationService {
             );
             reservationRequest = newRequest;
         }
-
         final Time findTime = timeRepository.findById(reservationRequest.getTime())
                 .orElseThrow(() -> new RuntimeException("요청한 시간이 존재하지 않습니다."));
         final Theme findTheme = themeRepository.findById(reservationRequest.getTheme())
@@ -57,12 +56,23 @@ public class ReservationService {
         final Member findMember = memberRepository.findById(loginMember.id())
                 .orElseThrow(() -> new RuntimeException("회원이 존재하지 않습니다."));
 
+        validateDuplicatedReservation(reservationRequest, findTheme, findTime);
+
         Reservation reservation = reservationRepository.save(
                 reservationRequest.toEntity(findTime, findTheme, findMember));
 
         return new ReservationResponse(
                 reservation.getId(), reservationRequest.getName(), reservation.getTheme().getName(),
                 reservation.getDate(), reservation.getTime().getTime());
+    }
+
+    private void validateDuplicatedReservation(final ReservationRequest request,
+                                               final Theme theme,
+                                               final Time time) {
+        reservationRepository.findByDateAndThemeIdAndTimeId(request.getDate(), theme.getId(), time.getId())
+                .ifPresent(reservation -> {
+                    throw new RuntimeException("이미 예약되었습니다.");
+                });
     }
 
     public List<ReservationResponse> findAll() {
