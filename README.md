@@ -75,4 +75,4 @@ Long memberId = Long.valueOf(Jwts.parserBuilder()
         .getBody().getSubject());
 ```
 3. JPA 연관관계 복습
-4. SQL문 공부 및 실습
+4. 데이터베이스 및 SQL 공부
