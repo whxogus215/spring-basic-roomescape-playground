@@ -58,7 +58,10 @@
 ![img.png](class_diagram_add_waiting.png)
 
 ### 해야할 것들
-1. 컨트롤러에 DTO를 반환하도록 리팩토링(ex, TimeService)
+1. 공통피드백 적용하기(Optional, 예외처리, 의존성 관계 정리(조영호님 세미나))
+   - [x] Repository 반환 타입에 `Optional`로 감싸기
+   - [x] 커스텀 예외 추가
+2. 컨트롤러에 DTO를 반환하도록 리팩토링(ex, TimeService)
 2. 컨트롤러가 서비스를 의존하도록 리팩토링(ex, ThemeController)
 3. 서비스 계층 로직에서 라인이 20줄 넘어가는 부분 리팩토링(ex. ReservationService의 save())
 4. 서브모듈 적용해서 properties 파일 형상관리 하기

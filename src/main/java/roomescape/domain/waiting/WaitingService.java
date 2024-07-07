@@ -1,7 +1,13 @@
 package roomescape.domain.waiting;
 
+import static roomescape.domain.exception.ExceptionCode.*;
+
 import java.util.List;
 import org.springframework.stereotype.Service;
+import roomescape.domain.exception.ExceptionCode;
+import roomescape.domain.exception.MemberException;
+import roomescape.domain.exception.ThemeException;
+import roomescape.domain.exception.TimeException;
 import roomescape.domain.member.dto.LoginMember;
 import roomescape.domain.member.entity.Member;
 import roomescape.domain.member.repository.MemberRepository;
@@ -47,11 +53,11 @@ public class WaitingService {
          * 3. Theme
          */
         final Member findMember = memberRepository.findById(loginMember.id())
-                .orElseThrow(() -> new RuntimeException("회원이 존재하지 않습니다."));
+                .orElseThrow(() -> new MemberException(RESULT_NOT_FOUND));
         final Time findTime = timeRepository.findById(waitingRequest.time())
-                .orElseThrow(() -> new RuntimeException("예약 시간이 존재하지 않습니다."));
+                .orElseThrow(() -> new TimeException(RESULT_NOT_FOUND));
         final Theme findTheme = themeRepository.findById(waitingRequest.theme())
-                .orElseThrow(() -> new RuntimeException("예약 테마가 존재하지 않습니다."));
+                .orElseThrow(() -> new ThemeException(RESULT_NOT_FOUND));
         final Long waitingNumber = waitingRepository.countByThemeIdAndTimeIdAndDate(
                 findTheme.getId(), findTime.getId(), waitingRequest.date());
         final Waiting savedWaiting = waitingRepository.save(new Waiting(
@@ -65,11 +71,5 @@ public class WaitingService {
 
     public void deleteWaiting(Long id) {
         waitingRepository.deleteById(id);
-    }
-
-    public List<MyReservationResponse> findMyWaitings(final Long id) {
-        final List<WaitingWithRank> waitings = waitingRepository.findWaitingWithRankByMemberId(id);
-        // MyReservationResponse로 변환
-        return null;
     }
 }

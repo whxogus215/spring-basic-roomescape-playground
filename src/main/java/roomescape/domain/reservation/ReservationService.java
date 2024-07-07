@@ -1,7 +1,14 @@
 package roomescape.domain.reservation;
 
+import static roomescape.domain.exception.ExceptionCode.*;
+
 import java.util.List;
 import org.springframework.stereotype.Service;
+import roomescape.domain.exception.ExceptionCode;
+import roomescape.domain.exception.MemberException;
+import roomescape.domain.exception.ReservationException;
+import roomescape.domain.exception.ThemeException;
+import roomescape.domain.exception.TimeException;
 import roomescape.domain.member.dto.LoginMember;
 import roomescape.domain.member.entity.Member;
 import roomescape.domain.member.repository.MemberRepository;
@@ -50,11 +57,11 @@ public class ReservationService {
             reservationRequest = newRequest;
         }
         final Time findTime = timeRepository.findById(reservationRequest.getTime())
-                .orElseThrow(() -> new RuntimeException("요청한 시간이 존재하지 않습니다."));
+                .orElseThrow(() -> new TimeException(RESULT_NOT_FOUND));
         final Theme findTheme = themeRepository.findById(reservationRequest.getTheme())
-                .orElseThrow(() -> new RuntimeException("요청한 테마가 존재하지 않습니다."));
+                .orElseThrow(() -> new ThemeException(RESULT_NOT_FOUND));
         final Member findMember = memberRepository.findById(loginMember.id())
-                .orElseThrow(() -> new RuntimeException("회원이 존재하지 않습니다."));
+                .orElseThrow(() -> new MemberException(RESULT_NOT_FOUND));
 
         validateDuplicatedReservation(reservationRequest, findTheme, findTime);
 
@@ -71,7 +78,7 @@ public class ReservationService {
                                                final Time time) {
         reservationRepository.findByDateAndThemeIdAndTimeId(request.getDate(), theme.getId(), time.getId())
                 .ifPresent(reservation -> {
-                    throw new RuntimeException("이미 예약되었습니다.");
+                    throw new ReservationException("이미 예약되었습니다.");
                 });
     }
 

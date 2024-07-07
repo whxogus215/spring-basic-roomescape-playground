@@ -1,7 +1,11 @@
 package roomescape.domain.member;
 
+import static roomescape.domain.exception.ExceptionCode.*;
+
 import org.springframework.stereotype.Service;
 import roomescape.domain.auth.JwtTokenManager;
+import roomescape.domain.exception.ExceptionCode;
+import roomescape.domain.exception.LoginException;
 import roomescape.domain.member.dto.MemberLoginRequest;
 import roomescape.domain.member.dto.MemberRequest;
 import roomescape.domain.member.dto.MemberResponse;
@@ -28,9 +32,10 @@ public class MemberService {
         return new MemberResponse(member.getId(), member.getName(), member.getEmail());
     }
 
-    public String findMember(MemberLoginRequest memberLoginRequest) {
-        final Member member = memberRepository.findByEmailAndPassword(
-                memberLoginRequest.email(), memberLoginRequest.password());
+    public String findMember(MemberLoginRequest request) {
+        final Member member = memberRepository.findByEmailAndPassword(request.email(),
+                        request.password())
+                .orElseThrow(() -> new LoginException(REQUEST_INVALID.getMessage()));
         return jwtTokenManager.createToken(member);
     }
 }
