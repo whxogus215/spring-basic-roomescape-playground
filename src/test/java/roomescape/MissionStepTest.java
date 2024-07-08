@@ -11,7 +11,9 @@ import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.stereotype.Component;
 import org.springframework.test.annotation.DirtiesContext;
+import auth.JwtUtils;
 import roomescape.domain.reservation.dto.MyReservationResponse;
 import roomescape.domain.reservation.dto.ReservationResponse;
 import roomescape.domain.waiting.dto.WaitingResponse;
@@ -173,5 +175,11 @@ public class MissionStepTest {
                 .extract();
 
         return response.headers().get("Set-Cookie").getValue().split(";")[0].split("=")[1];
+    }
+
+    @Test
+    void 칠단계() {
+        Component componentAnnotation = JwtUtils.class.getAnnotation(Component.class);
+        assertThat(componentAnnotation).isNull();
     }
 }

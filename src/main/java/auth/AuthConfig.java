@@ -1,4 +1,4 @@
-package roomescape.auth;
+package auth;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 public class AuthConfig {
 
     @Bean
-    JwtTokenManager jwtTokenManager() {
-        return new JwtTokenManager();
+    JwtUtils jwtTokenManager() {
+        return new JwtUtils();
     }
 }

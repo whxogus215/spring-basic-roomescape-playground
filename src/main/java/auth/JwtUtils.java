@@ -1,14 +1,13 @@
-package roomescape.auth;
+package auth;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import roomescape.global.constant.AuthConstant;
 import roomescape.domain.member.entity.Member;
 
-public class JwtTokenManager {
+public class JwtUtils {
 
     @Value("${roomescape.auth.jwt.secret}")
     private String secretKey;
