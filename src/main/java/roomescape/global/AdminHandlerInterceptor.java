@@ -4,7 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-import roomescape.domain.auth.JwtTokenManager;
+import roomescape.auth.JwtTokenManager;
 import roomescape.global.constant.AuthConstant;
 
 @Component

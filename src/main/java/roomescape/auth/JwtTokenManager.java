@@ -1,4 +1,4 @@
-package roomescape.domain.auth;
+package roomescape.auth;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import roomescape.global.constant.AuthConstant;
 import roomescape.domain.member.entity.Member;
 
-@Component
 public class JwtTokenManager {
 
     @Value("${roomescape.auth.jwt.secret}")

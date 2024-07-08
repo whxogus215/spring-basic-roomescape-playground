@@ -3,8 +3,7 @@ package roomescape.domain.member;
 import static roomescape.domain.exception.ExceptionCode.*;
 
 import org.springframework.stereotype.Service;
-import roomescape.domain.auth.JwtTokenManager;
-import roomescape.domain.exception.ExceptionCode;
+import roomescape.auth.JwtTokenManager;
 import roomescape.domain.exception.LoginException;
 import roomescape.domain.member.dto.MemberLoginRequest;
 import roomescape.domain.member.dto.MemberRequest;

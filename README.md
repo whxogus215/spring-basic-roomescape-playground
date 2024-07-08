@@ -57,6 +57,11 @@
   - [x] ReservationService에서 예약을 추가하기 전에 검증한다.
 ![img.png](class_diagram_add_waiting.png)
 
+## 7단계 - @Configuration
+- [x] JWT 관련 로직이 담긴 객체들은 `roomescape`와 같은 레벨의 패키지에 분리
+  - 어플리케이션 관련 로직이 아니라 단순 기술지원과 관련된 로직이므로 이들은 수동 빈응로 등록해서 관리한다. 이들은 애플리케이션 전반에 걸쳐 적용될 수 있는 빈들이기 때문에 
+  수동으로 등록하여 관리하는 것으로 보인다.
+
 ### 해야할 것들
 1. 공통피드백 적용하기(Optional, 예외처리, 의존성 관계 정리(조영호님 세미나))
    - [x] Repository 반환 타입에 `Optional`로 감싸기
