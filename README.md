@@ -64,8 +64,9 @@
 
 ## 8단계 - Profile과 Resource
 - [ ] `DataLoader`와 `TestDataLoader` 생성
+  - `DataLoader`는 사용자 정보 초기화
+  - `TestDataLoader`는 테스트에 필요한 사전 값만 초기화
 - [x] JWT 토큰 값 외부파일로 분리
-
 
 ### 해야할 것들
 1. 공통피드백 적용하기(Optional, 예외처리, 의존성 관계 정리(조영호님 세미나))

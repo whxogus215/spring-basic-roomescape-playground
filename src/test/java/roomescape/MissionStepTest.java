@@ -10,17 +10,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.stereotype.Component;
 import org.springframework.test.annotation.DirtiesContext;
 import auth.JwtUtils;
+import org.springframework.test.context.ActiveProfiles;
 import roomescape.domain.reservation.dto.MyReservationResponse;
 import roomescape.domain.reservation.dto.ReservationResponse;
 import roomescape.domain.waiting.dto.WaitingResponse;
 
+@ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class MissionStepTest {
+
+    @Value("${roomescape.auth.jwt.secret}")
+    private String secretKey;
 
     @Test
     void 일단계() {
@@ -90,7 +96,7 @@ public class MissionStepTest {
     void 삼단계() {
         // 해당 ID와 비밀번호로 조회한 멤버에 담긴 권한은 "admin"이 아니므로 "/admin" 요청 불가
         String brownToken = createToken("brown@email.com", "password");
-        
+
         RestAssured.given().log().all()
                 .cookie("token", brownToken)
                 .get("/admin")
@@ -99,7 +105,7 @@ public class MissionStepTest {
 
         // 해당 ID와 비밀번호로 조회한 멤버에 담긴 권한은 "admin"이므로 "/admin" 요청 가능
         String adminToken = createToken("admin@email.com", "password");
-        
+
         RestAssured.given().log().all()
                 .cookie("token", adminToken)
                 .get("/admin")
@@ -181,5 +187,10 @@ public class MissionStepTest {
     void 칠단계() {
         Component componentAnnotation = JwtUtils.class.getAnnotation(Component.class);
         assertThat(componentAnnotation).isNull();
+    }
+
+    @Test
+    void 팔단계() {
+        assertThat(secretKey).isNotBlank();
     }
 }
